@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>moss - Social Media Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Login/Auth Screen -->
+    <div id="authContainer" class="auth-container">
+        <div class="auth-box">
+            <div class="moss-logo">🌿 moss</div>
+            <h1>Welcome to moss</h1>
+            <p>Share your thoughts, connect with others</p>
+            
+            <form id="authForm">
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="button" id="loginBtn" class="btn-primary">Login</button>
+                <button type="button" id="signupBtn" class="btn-secondary">Create Account</button>
+            </form>
+            
+            <div id="signupForm" class="hidden">
+                <h2>Sign Up</h2>
+                <div class="form-group">
+                    <input type="text" id="username" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="signupEmail" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="signupPassword" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                </div>
+                <button type="button" id="createAccountBtn" class="btn-primary">Create Account</button>
+                <button type="button" id="backToLoginBtn" class="btn-secondary">Back to Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="appContainer" class="app-container hidden">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="moss-logo-small">🌿</div>
+                <h2>moss</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-btn active" data-page="feed">
+                    <span class="icon">📰</span> Feed
+                </button>
+                <button class="nav-btn" data-page="threads">
+                    <span class="icon">💬</span> Threads
+                </button>
+                <button class="nav-btn" data-page="shorts">
+                    <span class="icon">📹</span> Shorts
+                </button>
+                <button class="nav-btn" data-page="messages">
+                    <span class="icon">✉️</span> Messages
+                </button>
+                <button class="nav-btn" data-page="profile">
+                    <span class="icon">👤</span> Profile
+                </button>
+            </nav>
+            <button id="logoutBtn" class="btn-logout">Logout</button>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Feed Page -->
+            <section id="feedPage" class="page active">
+                <div class="page-header">
+                    <h1>Your Feed</h1>
+                </div>
+                <div class="create-post">
+                    <div class="create-post-header">
+                        <div class="avatar">👤</div>
+                        <input type="text" id="postInput" placeholder="What's on your mind?" class="post-input">
+                    </div>
+                    <div class="create-post-actions">
+                        <button id="postBtn" class="btn-primary">Post</button>
+                    </div>
+                </div>
+                <div id="feedContainer" class="feed-container"></div>
+            </section>
+
+            <!-- Threads Page -->
+            <section id="threadsPage" class="page">
+                <div class="page-header">
+                    <h1>Thread View</h1>
+                </div>
+                <div class="create-thread">
+                    <h2>Start a Thread</h2>
+                    <div class="thread-input-group">
+                        <textarea id="threadInput" placeholder="Begin your thread..."></textarea>
+                        <button id="startThreadBtn" class="btn-primary">Start Thread</button>
+                    </div>
+                </div>
+                <div id="threadsContainer" class="threads-container"></div>
+            </section>
+
+            <!-- Shorts Page (TikTok-style) -->
+            <section id="shortsPage" class="page">
+                <div class="shorts-container">
+                    <div id="shortsScroll" class="shorts-scroll">
+                        <!-- Shorts will be loaded here -->
+                    </div>
+                    <div class="shorts-controls">
+                        <button class="shorts-btn" id="prevShortBtn">⬆️</button>
+                        <button class="shorts-btn" id="nextShortBtn">⬇️</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Messages Page -->
+            <section id="messagesPage" class="page">
+                <div class="messages-container">
+                    <div class="conversations-list">
+                        <h2>Messages</h2>
+                        <div id="conversationsList" class="conversations"></div>
+                    </div>
+                    <div class="chat-area">
+                        <div id="chatHeader" class="chat-header hidden">
+                            <h3 id="chatWith"></h3>
+                        </div>
+                        <div id="messagesWindow" class="messages-window hidden"></div>
+                        <div id="noChatSelected" class="no-chat-selected">
+                            <p>Select a conversation or start a new one</p>
+                        </div>
+                        <div id="messageInputArea" class="message-input-area hidden">
+                            <input type="text" id="messageInput" placeholder="Type a message...">
+                            <button id="sendMessageBtn" class="btn-primary">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Page -->
+            <section id="profilePage" class="page">
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <div class="profile-avatar">👤</div>
+                        <div class="profile-info">
+                            <h2 id="profileUsername"></h2>
+                            <p id="profileEmail"></p>
+                            <p id="profileStats"></p>
+                        </div>
+                    </div>
+                    <div class="profile-tabs">
+                        <button class="tab-btn active" data-tab="posts">Posts</button>
+                        <button class="tab-btn" data-tab="threads">Threads</button>
+                        <button class="tab-btn" data-tab="shorts">Shorts</button>
+                    </div>
+                    <div id="profilePosts" class="profile-content"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="app.js"></script>
+    <script src="feed.js"></script>
+    <script src="threads.js"></script>
+    <script src="shorts.js"></script>
+    <script src="messages.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>
